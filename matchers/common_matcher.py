@@ -16,7 +16,8 @@ class MatchesJsonSchema(BaseMatcher):
             return False
 
     def describe_to(self, description):
-        title = f' "{self.json_schema.get("title", "")}"'
+        title = self.json_schema.get("title", None)
+        title = f' "{title}"' if title else ''
         description.append_text(f'\n     JSON object should match schema{title}')
 
     def describe_mismatch(self, item, mismatch_description):
