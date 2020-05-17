@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="json-schema-matchers",
-    version="0.0.4",
+    version="0.0.6",
     author="Jamal Zeinalov",
     author_email="jamal.zeynalov@gmail.com",
     description="Custom hamcrest matchers for json schema validation",
