@@ -1,5 +1,5 @@
 # json-schema-matchers
-#### Custom matchers for json schema validation
+#### PyHamcrest matchers extension for json schema validation
 
 The schema should be implemented following syntax of [Draft-07 to 2019-09](https://json-schema.org/draft-07/json-schema-release-notes.html) version.
 Schema example:
@@ -8,19 +8,21 @@ single_user_schema = {
     "title": "Single User Info",
     "type": "object",
     "properties": {
-        "first name": {
-            "type": "string"
+        "first_name": {
+            "type": "string",
+            "minLength": 3
         },
-        "last name": {
-            "type": "string"
+        "last_name": {
+            "type": "string",
+            "minLength": 3
         },
-        "phone number": {
+        "phone_number": {
             "type": "number"
         }
     },
     "required": [
-        "first",
-        "last",
+        "first_name",
+        "last_name",
     ]
 }
 
@@ -32,8 +34,8 @@ all_users_info_schema = {
 ```
 Then you can use `matches_json_schema` matcher with all hamcrest matchers:
 ```python
-from hamcrest import *
-from matchers.common_matcher import matches_json_schema
+from hamcrest import assert_that
+from json_schema_matchers.common_matcher import matches_json_schema
 
 users_list_json_obj = [
     {
@@ -62,13 +64,13 @@ users_list_json_obj = [
     },
     {
         "first_name": None,
-        "last_name": 'Jefferson'
+        "last_name": 'Je'
     }
 ]
 
 assert_that(users_list_json_obj, matches_json_schema(all_users_info_schema))
 ```
-```
+```json
 AssertionError: 
 Expected: 
      JSON object should match schema "All Users Info"
@@ -84,10 +86,19 @@ On instance[0]['phone_number']:
     '123456789'
 
 ------------
+'Je' is too short
+
+Failed validating 'minLength' in schema['items']['properties']['last_name']:
+    {'minLength': 3, 'type': 'string'}
+
+On instance[1]['last_name']:
+    'Je'
+
+------------
 None is not of type 'string'
 
 Failed validating 'type' in schema['items']['properties']['first_name']:
-    {'type': 'string'}
+    {'minLength': 3, 'type': 'string'}
 
 On instance[1]['first_name']:
     None
