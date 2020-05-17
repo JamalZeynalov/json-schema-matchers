@@ -93,8 +93,4 @@ On instance[1]['first_name']:
     None
 
 ------------
-
-
-Process finished with exit code 1
-
 ```
