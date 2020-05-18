@@ -1,4 +1,3 @@
-# json-schema-matchers
 #### PyHamcrest matchers extension for json schema validation
 
 The schema should be implemented following syntax of [Draft-07 to 2019-09](https://json-schema.org/draft-07/json-schema-release-notes.html) version.
@@ -104,4 +103,9 @@ On instance[1]['first_name']:
     None
 
 ------------
+```
+#### Dependencies:
+```requirements.txt
+jsonschema==3.2.0
+PyHamcrest==2.0.2
 ```

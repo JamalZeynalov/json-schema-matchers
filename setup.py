@@ -5,10 +5,10 @@ with open("README.md", "r") as fh:
 
 setup(
     name="json-schema-matchers",
-    version="0.1.0",
+    version="0.1.2",
     author="Jamal Zeinalov",
     author_email="jamal.zeynalov@gmail.com",
-    description="Custom hamcrest matchers for json schema validation",
+    description="PyHamcrest matchers extension for json schema validation",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/JamalZeynalov/json-schema-matchers",
@@ -19,8 +19,8 @@ setup(
         "Operating System :: OS Independent",
     ],
     install_requires=[
-        'jsonschema',
-        'PyHamcrest'
+        'jsonschema==3.2.0',
+        'PyHamcrest==2.0.2'
     ],
     python_requires='>=3.6',
 )

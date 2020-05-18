@@ -1,5 +1,6 @@
 from hamcrest.core.base_matcher import BaseMatcher
-from jsonschema import Draft7Validator, exceptions
+from jsonschema import Draft7Validator, exceptions, RefResolutionError
+from jsonschema.exceptions import UnknownType
 
 
 class MatchesJsonSchema(BaseMatcher):
@@ -13,10 +14,17 @@ class MatchesJsonSchema(BaseMatcher):
             self.validator = Draft7Validator(self.json_schema)
             self.validator.validate(instance)
             return True
+
         except exceptions.ValidationError:
             for error in sorted(self.validator.iter_errors(instance), key=str):
                 self.error += f"\n{error}\n\n------------"
             return False
+
+        except (AttributeError, RefResolutionError, KeyError, UnknownType) as attr_e:
+            raise Exception(f" Schema is invalid:\n\n{attr_e}\n\n{self.json_schema}")
+
+        # except RefResolutionError as ref_e:
+        #     raise RefResolutionError(f" Schema is invalid:\n\n{ref_e}\n\n{self.json_schema}")
 
     def describe_to(self, description):
         title = self.json_schema.get("title", None)
