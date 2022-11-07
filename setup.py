@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="json-schema-matchers",
-    version="0.1.2",
+    version="0.1.3",
     author="Jamal Zeinalov",
     author_email="jamal.zeynalov@gmail.com",
     description="PyHamcrest matchers extension for json schema validation",
@@ -19,8 +19,8 @@ setup(
         "Operating System :: OS Independent",
     ],
     install_requires=[
-        'jsonschema==3.2.0',
-        'PyHamcrest==2.0.2'
+        'jsonschema>=3.2.0',
+        'PyHamcrest>=2.0.2'
     ],
     python_requires='>=3.6',
 )
